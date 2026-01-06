@@ -24,7 +24,7 @@ If you have Mod Menu and Cloth Config installed, you can access the configuratio
 | Passive Mob Color |	Hex color for peaceful entities. | 0xFFFFFF |
 | Invisible Mob Color |	Hex color for invisible entities when enabled. | 0x808080 |
 
-[!NOTE] Config files are saved at .minecraft/config/moblocator.json.
+NOTE: Config files are saved at .minecraft/config/moblocator.json.
 
 📦 Requirements
 
