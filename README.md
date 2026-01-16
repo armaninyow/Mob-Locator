@@ -22,7 +22,7 @@ Whether you are caving, hunting specific mobs, or trying to avoid a surprise Cre
 ## 🚀 Installation
 
 ### Prerequisites
-* **Minecraft:** 1.21.10 (Copper Age)
+* **Minecraft:** 1.21.10
 * **Loader:** [Fabric Loader](https://fabricmc.net/use/installer/) (>=0.18.4)
 * **Dependencies:**
     * [Fabric API](https://modrinth.com/mod/fabric-api)
