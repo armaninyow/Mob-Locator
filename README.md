@@ -2,7 +2,7 @@
 
 # Mob Locator
 
-
+![Mod Icon](src/main/resources/assets/moblocator/icon.png)
 
 ## 🛠️ Functionality
 
