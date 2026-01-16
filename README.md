@@ -20,10 +20,18 @@ Whether you are caving, hunting specific mobs, or trying to avoid a surprise Cre
 * **Accessibility:** Helps players with hearing difficulties identify which direction mob sounds are coming from.
 
 ## 🚀 Installation
-1.  **Requirements**: Ensure you have Minecraft 1.21.10, Fabric Loader 0.18.4, and the Fabric API installed.
-2.  **Download**: Get the latest `.jar` from [Modrinth](https://modrinth.com/mod/hotbar-inventory-transfer) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hotbar-inventory-transfer).
-3.  **Setup**: Drop the file into your `%appdata%/.minecraft/mods` folder.
-4.  **Configure**: Go to **Options > Controls > Keybinds** to find the "Hotbar Inventory Transfer" category.
+
+### Prerequisites
+* **Minecraft:** 1.21.10 (Copper Age)
+* **Loader:** [Fabric Loader](https://fabricmc.net/use/installer/) (>=0.18.4)
+* **Dependencies:** * [Fabric API](https://modrinth.com/mod/fabric-api)
+    * [Cloth Config API](https://modrinth.com/mod/cloth-config) (Required for configuration)
+    * [Mod Menu](https://modrinth.com/mod/modmenu) (To access the settings screen)
+
+### Steps
+1.  Download the latest `.jar` from the [Releases](https://github.com/armaninyow/Mob-Locator/releases) page.
+2.  Drop the file into your Minecraft `%appdata%/.minecraft/mods` folder.
+3.  Launch the game using the Fabric profile.
 
 ## 🆘 Support
 If you encounter bugs or wish to contribute:
