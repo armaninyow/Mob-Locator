@@ -1,37 +1,38 @@
-Mob Locator
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.youtube.com/watch?v=xvFZjo5PgG0)
 
-Mob Locator is a lightweight, client-side utility for Minecraft 1.21.1 that adds a "sonar-style" radar to your HUD. It visualizes the position of nearby entities by rendering pixel-perfect icons directly on your XP bar.
+# Mob Locator
 
-🚀 Features
+![Mod Icon](src/main/resources/assets/hotbarinventorytransfer/icon.png)
 
-- Proximity Tracking: Icons change size based on distance, ranging from a 3x3 pixel dot for distant mobs to a 7x7 square for nearby threats.
-- Vertical Awareness: Indicators include small arrows to show if a mob is more than 3 blocks above or below your current position.
-- Intuitive Color Coding:
-  - Hostile (Red): Includes standard monsters and neutral mobs that have become aggressive (e.g., angry Endermen or Wolves).
-  - Passive (White): Friendly creatures like cows, sheep, and pigs.
-  - Invisible (Gray): Optional tracking for invisible entities.
-- Variable Detection Range: Different mobs have unique detection ranges based on "hearing" logic—ranging from 8 blocks for bats to 192 blocks for the Ender Dragon.
-- Performance Focused: A purely client-side mod with minimal impact on frame rates.
+## 🛠️ Functionality
 
-🛠️ Configuration
+* **Real-time Radar:** Displays icons for nearby mobs relative to your current facing direction.
+* **Vertical Tracking:** Integrated indicators (arrows) show if a mob is significantly above or below your current Y-level.
+* **Hostility Detection:** Uses color coding to distinguish between hostile (Red), passive (White), and neutral entities.
+* **Fully Configurable:** Customize colors and toggle visibility for invisible entities via the in-game config menu.
+* **Pixel-Perfect Icons:** Custom-rendered geometric icons that blend seamlessly with the vanilla Minecraft UI.
 
-If you have Mod Menu and Cloth Config installed, you can access the configuration screen in-game.
+## ✨ Benefits
+Whether you are caving, hunting specific mobs, or trying to avoid a surprise Creeper, **Mob Locator** provides essential spatial awareness without cluttering your screen with a full mini-map.
 
-| Setting	| Description	| Default |
-| - | - | - |
-| Show Invisible Mobs |	Toggles tracking for invisible entities. | false |
-| Hostile Mob Color |	Hex color for aggressive entities. | 0xFF0000 |
-| Passive Mob Color |	Hex color for peaceful entities. | 0xFFFFFF |
-| Invisible Mob Color |	Hex color for invisible entities when enabled. | 0x808080 |
+* **Lightweight:** Minimal impact on FPS.
+* **Vanilla Friendly:** No complex overlays; it looks like it belongs in the base game.
+* **Accessibility:** Helps players with hearing difficulties identify which direction mob sounds are coming from.
 
-NOTE: Config files are saved at .minecraft/config/moblocator.json.
+## 🚀 Installation
+1.  **Requirements**: Ensure you have Minecraft 1.21.10, Fabric Loader 0.18.4, and the Fabric API installed.
+2.  **Download**: Get the latest `.jar` from [Modrinth](https://modrinth.com/mod/hotbar-inventory-transfer) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/hotbar-inventory-transfer).
+3.  **Setup**: Drop the file into your `%appdata%/.minecraft/mods` folder.
+4.  **Configure**: Go to **Options > Controls > Keybinds** to find the "Hotbar Inventory Transfer" category.
 
-📦 Requirements
+## 🆘 Support
+If you encounter bugs or wish to contribute:
+* **Issue Tracker**: Report problems on our [GitHub Issues page](https://github.com/armaninyow/Mob-Locator/issues).
+* **Contributions**: Submit improvements via [Pull Requests](https://github.com/armaninyow/Mob-Locator/pulls).
 
-- Minecraft: 1.21.10
-- Fabric Loader: >=0.17.0
-- Java: >=21
-- Dependencies:
-  - Fabric API
-  - Cloth Config API
-  - Mod Menu (Optional, for in-game settings)
+## 👥 Credits
+* **Author**: Armaninyow
+* **License**: Released under [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.youtube.com/watch?v=xvFZjo5PgG0)
+
