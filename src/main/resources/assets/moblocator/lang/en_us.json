@@ -1,13 +1,13 @@
 {
-  "moblocator.config.title": "Mob Locator Configuration",
-  "moblocator.config.general": "General Settings",
-  "moblocator.config.colors": "Color Settings",
-  "moblocator.config.showInvisible": "Show Invisible Mobs",
-  "moblocator.config.showInvisible.tooltip": "Show invisible mobs on the locator bar (displayed in gray)",
-  "moblocator.config.hostileColor": "Hostile Mob Color",
-  "moblocator.config.hostileColor.tooltip": "Color for hostile/enemy mobs (default: Red)",
-  "moblocator.config.passiveColor": "Passive Mob Color",
-  "moblocator.config.passiveColor.tooltip": "Color for passive/friendly mobs (default: White)",
-  "moblocator.config.invisibleColor": "Invisible Mob Color",
-  "moblocator.config.invisibleColor.tooltip": "Color for invisible mobs when shown (default: Gray)"
+	"moblocator.config.title": "Mob Locator Configuration",
+	"moblocator.config.general": "General Settings",
+	"moblocator.config.colors": "Color Settings",
+	"moblocator.config.showInvisible": "Show Invisible Mobs",
+	"moblocator.config.showInvisible.tooltip": "Show invisible mobs on the locator bar (displayed in gray)",
+	"moblocator.config.hostileColor": "Hostile Mob Color",
+	"moblocator.config.hostileColor.tooltip": "Color for hostile/enemy mobs (default: Red)",
+	"moblocator.config.passiveColor": "Passive Mob Color",
+	"moblocator.config.passiveColor.tooltip": "Color for passive/friendly mobs (default: White)",
+	"moblocator.config.invisibleColor": "Invisible Mob Color",
+	"moblocator.config.invisibleColor.tooltip": "Color for invisible mobs when shown (default: Gray)"
 }
