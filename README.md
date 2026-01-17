@@ -31,7 +31,7 @@ Whether you are caving, hunting specific mobs, or trying to avoid a surprise Cre
 
 ### Steps
 1.  Download the latest `.jar` from [Modrinth](https://modrinth.com/mod/mob-locator) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mob-locator).
-2.  Drop the file into your Minecraft `%appdata%/.minecraft/mods` folder.
+2.  Move the file into your Minecraft `%appdata%/.minecraft/mods` folder.
 3.  Launch the game using the Fabric profile.
 
 ## Support
