@@ -36,8 +36,8 @@ Whether you are caving, hunting specific mobs, or trying to avoid a surprise Cre
 
 ## Support
 If you encounter bugs or wish to contribute:
-* **Issue Tracker**: Report problems on our [GitHub Issues page](https://github.com/armaninyow/Mob-Locator/issues).
-* **Contributions**: Submit improvements via [Pull Requests](https://github.com/armaninyow/Mob-Locator/pulls).
+* [Report any problems you find.](https://github.com/armaninyow/Mob-Locator/issues).
+* [Submit your improvements and code changes.](https://github.com/armaninyow/Mob-Locator/pulls)
 
 ## Credits
 * **Author**: Armaninyow
