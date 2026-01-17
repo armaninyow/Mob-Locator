@@ -24,10 +24,10 @@ Whether you are caving, hunting specific mobs, or trying to avoid a surprise Cre
 ### Prerequisites
 * **Minecraft:** 1.21.10
 * **Loader:** [Fabric Loader](https://fabricmc.net/use/installer/) (>=0.18.4)
-* **Dependencies:**
+* **Core Dependencies:**
     * [Fabric API](https://modrinth.com/mod/fabric-api)
     * [Cloth Config API](https://modrinth.com/mod/cloth-config) (Required for configuration)
-    * [Mod Menu](https://modrinth.com/mod/modmenu) (To access the settings screen)
+    * [Mod Menu](https://modrinth.com/mod/modmenu) (Recommended for configuration)
 
 ### Steps
 1.  Download the latest `.jar` from [Modrinth](https://modrinth.com/mod/mob-locator) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mob-locator).
