@@ -1,6 +1,11 @@
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.youtube.com/watch?v=xvFZjo5PgG0)
 
 # Mob Locator
+<details>
+  <summary></summary>
+   
+A lightweight mod that provides a pixel-perfect, color-coded entity radar integrated directly above your experience bar for enhanced spatial awareness.
+</details>
 
 ![Mod Icon](src/main/resources/assets/moblocator/icon.png)
 
