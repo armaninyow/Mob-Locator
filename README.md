@@ -18,6 +18,7 @@ A lightweight mod that provides a pixel-perfect, color-coded entity radar integr
 * **Hostility Detection:** Uses color coding to distinguish between hostile (Red), passive (White), and neutral entities.
 * **Fully Configurable:** Customize colors and toggle visibility for invisible entities via the in-game config menu.
 * **Pixel-Perfect Icons:** Custom-rendered geometric icons that blend seamlessly with the vanilla Minecraft UI.
+* **Mob Blacklist**: Filter out specific mobs (like Bats or Phantoms) to keep your radar clean and focused on what matters.
 </details>
 
 ## Benefits
