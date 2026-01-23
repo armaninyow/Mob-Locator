@@ -48,6 +48,9 @@ public class MobLocator implements ClientModInitializer {
 		for (LivingEntity entity : client.world.getEntitiesByClass(LivingEntity.class, 
 				player.getBoundingBox().expand(64), e -> e != player && e.isAlive())) {
 
+			// Check if mob is blacklisted
+			if (isBlacklisted(entity)) continue;
+
 			if (entity.isInvisible() && !MobLocatorConfig.showInvisibleMobs) continue;
 
 			double distance = player.distanceTo(entity);
@@ -80,6 +83,16 @@ public class MobLocator implements ClientModInitializer {
 		for (MobInfo mobInfo : detectedMobs) {
 			renderMobIndicator(context, mobInfo, xpBarLeft, xpBarWidth, baseY);
 		}
+	}
+
+	private boolean isBlacklisted(LivingEntity entity) {
+		String entityName = entity.getType().getName().getString();
+		for (String blacklisted : MobLocatorConfig.blacklistedMobs) {
+			if (entityName.equalsIgnoreCase(blacklisted.trim())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private void renderMobIndicator(DrawContext context, MobInfo mobInfo, int xpBarLeft, int xpBarWidth, int baseY) {

@@ -2,12 +2,16 @@ package com.armaninyow.moblocator;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MobLocatorConfig {
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -21,6 +25,7 @@ public class MobLocatorConfig {
 	public static int hostileMobColor = 0xFF0000; // Red
 	public static int passiveMobColor = 0xFFFFFF; // White
 	public static int invisibleMobColor = 0x808080; // Gray
+	public static List<String> blacklistedMobs = new ArrayList<>();
 
 	public static void load() {
 		if (CONFIG_FILE.exists()) {
@@ -31,6 +36,10 @@ public class MobLocatorConfig {
 					hostileMobColor = data.hostileMobColor & 0xFFFFFF; // Remove alpha if present
 					passiveMobColor = data.passiveMobColor & 0xFFFFFF;
 					invisibleMobColor = data.invisibleMobColor & 0xFFFFFF;
+					
+					if (data.blacklistedMobs != null) {
+						blacklistedMobs = new ArrayList<>(data.blacklistedMobs);
+					}
 				}
 			} catch (IOException e) {
 				MobLocator.LOGGER.error("Failed to load config", e);
@@ -46,6 +55,7 @@ public class MobLocatorConfig {
 			data.hostileMobColor = hostileMobColor & 0xFFFFFF; // Remove alpha
 			data.passiveMobColor = passiveMobColor & 0xFFFFFF;
 			data.invisibleMobColor = invisibleMobColor & 0xFFFFFF;
+			data.blacklistedMobs = new ArrayList<>(blacklistedMobs);
 			GSON.toJson(data, writer);
 		} catch (IOException e) {
 			MobLocator.LOGGER.error("Failed to save config", e);
@@ -57,5 +67,6 @@ public class MobLocatorConfig {
 		int hostileMobColor = 0xFF0000;
 		int passiveMobColor = 0xFFFFFF;
 		int invisibleMobColor = 0x808080;
+		List<String> blacklistedMobs = new ArrayList<>();
 	}
 }

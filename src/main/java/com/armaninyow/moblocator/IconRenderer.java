@@ -175,9 +175,10 @@ public class IconRenderer {
 	}
 
 	// Arrow Up - 7x4
+	// ARROW POSITION ADJUSTMENT: Moved 1 pixel up (startY changed from cy - 2 to cy - 3)
 	private static void drawArrowUp(DrawContext context, int cx, int cy, int color) {
 		int startX = cx - 3;
-		int startY = cy - 2;
+		int startY = cy - 3; // Changed from cy - 2 to move arrow up by 1 pixel
 
 		// Row 0: transparent, transparent, black, black, black, transparent, transparent
 		pixel(context, startX + 2, startY + 0, BLACK);
@@ -207,9 +208,10 @@ public class IconRenderer {
 	}
 
 	// Arrow Down - 7x4
+	// ARROW POSITION ADJUSTMENT: Moved 1 pixel down (startY changed from cy - 2 to cy - 1)
 	private static void drawArrowDown(DrawContext context, int cx, int cy, int color) {
 		int startX = cx - 3;
-		int startY = cy - 2;
+		int startY = cy - 1; // Changed from cy - 2 to move arrow down by 1 pixel
 
 		// Row 0: black, black, black, black, black, black, black
 		for (int x = 0; x <= 6; x++) {
