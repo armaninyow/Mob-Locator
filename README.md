@@ -4,7 +4,7 @@
 <details>
   <summary></summary>
    
-A lightweight mod that provides a pixel-perfect, color-coded entity radar integrated directly above your experience bar for enhanced spatial awareness.
+A lightweight mod that renders your inventory directly onto your HUD, allowing for real-time item tracking without the need to pause or open a menu screen.
 </details>
 
 ![Mod Icon](src/main/resources/assets/moblocator/icon.png)
