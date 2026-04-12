@@ -1,0 +1,14 @@
+{
+	"moblocator.config.title": "Mob Locator Configuration",
+	"moblocator.config.settings": "Settings",
+	"moblocator.config.hostileColor": "Hostile Mob Color",
+	"moblocator.config.hostileColor.tooltip": "Color for hostile/enemy mobs",
+	"moblocator.config.passiveColor": "Passive Mob Color",
+	"moblocator.config.passiveColor.tooltip": "Color for passive/friendly mobs",
+	"moblocator.config.showInvisible": "Show Invisible Mobs",
+	"moblocator.config.showInvisible.tooltip": "Show invisible mobs on the locator bar",
+	"moblocator.config.invisibleColor": "Invisible Mob Color",
+	"moblocator.config.invisibleColor.tooltip": "Color for invisible mobs when shown",
+	"moblocator.config.blacklistedMobs": "Blacklisted Mobs",
+	"moblocator.config.blacklistedMobs.tooltip": "Add mob names to prevent them from showing\non the locator (e.g., Creeper, Iron Golem)"
+}

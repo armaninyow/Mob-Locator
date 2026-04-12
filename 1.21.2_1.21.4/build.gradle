@@ -1,0 +1,23 @@
+plugins {
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
+	id 'maven-publish'
+}
+
+apply from: rootProject.file('shared.gradle')
+
+sourceSets {
+	main {
+		java {
+			srcDirs = [
+				file('src/main/java'),                        // 1.21.2-1.21.4 specific
+				rootProject.file('common/src/main/java')      // shared
+			]
+		}
+		resources {
+			srcDirs = [
+				file('src/main/resources'),                   // 1.21.2-1.21.4 fabric.mod.json
+				rootProject.file('common/src/main/resources') // shared (lang, icon)
+			]
+		}
+	}
+}
