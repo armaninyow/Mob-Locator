@@ -1,70 +1,40 @@
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.youtube.com/watch?v=xvFZjo5PgG0)
 
 # Mob Locator
-<details>
-  <summary></summary>
-   
-A lightweight mod that provides a pixel-perfect, color-coded entity radar integrated directly above your experience bar for enhanced spatial awareness.
-</details>
 
-![Mod Icon](src/main/resources/assets/moblocator/icon.png)
-
-## Functionality
-<details>
-  <summary></summary>
-   
-* **Real-time Radar:** Displays icons for nearby mobs relative to your current facing direction.
-* **Vertical Tracking:** Integrated indicators (arrows) show if a mob is significantly above or below your current Y-level.
-* **Hostility Detection:** Uses color coding to distinguish between hostile (Red), passive (White), and neutral entities.
-* **Fully Configurable:** Customize colors and toggle visibility for invisible entities via the in-game config menu.
-* **Pixel-Perfect Icons:** Custom-rendered geometric icons that blend seamlessly with the vanilla Minecraft UI.
-* **Mob Blacklist**: Filter out specific mobs (like Bats or Phantoms) to keep your radar clean and focused on what matters.
-</details>
-
-## Benefits
-<details>
-  <summary></summary>
-   
-Whether you are caving, hunting specific mobs, or trying to avoid a surprise Creeper, **Mob Locator** provides essential spatial awareness without cluttering your screen with a full mini-map.
-
-* **Lightweight:** Minimal impact on FPS.
-* **Vanilla Friendly:** No complex overlays; it looks like it belongs in the base game.
-* **Accessibility:** Helps players with hearing difficulties identify which direction mob sounds are coming from.
-</details>
+![Mod Icon](common/src/main/resources/assets/moblocator/icon.png)
 
 ## Installation
-<details>
-  <summary></summary>
-   
-### Prerequisites
-* **Minecraft:** 1.21.10
-* **Loader:** [Fabric Loader](https://fabricmc.net/use/installer/) (>=0.18.4)
-* **Core Dependencies:**
-    * [Fabric API](https://modrinth.com/mod/fabric-api)
-    * [Cloth Config API](https://modrinth.com/mod/cloth-config) (Required for configuration)
-    * [Mod Menu](https://modrinth.com/mod/modmenu) (Recommended for configuration)
 
-### Steps
-1.  Download the latest `.jar` from [Modrinth](https://modrinth.com/mod/mob-locator) or [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mob-locator).
-2.  Move the file into your Minecraft `%appdata%/.minecraft/mods` folder.
-3.  Launch the game using the Fabric profile.
-</details>
+* [Modrinth](https://modrinth.com/mod/mob-locator)
+* [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mob-locator)
 
 ## Support
-<details>
-  <summary></summary>
    
 If you encounter bugs or wish to contribute:
 * [Report any problems you find.](https://github.com/armaninyow/Mob-Locator/discussions/categories/issues)
 * [Share your ideas for new features.](https://github.com/armaninyow/Mob-Locator/discussions/categories/suggestions)
-</details>
 
-## Credits
+## Changelog
 <details>
   <summary></summary>
    
-* **Author**: Armaninyow
-* **License**: Released under [CC0-1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+### 3.0.0—1.21.x
+* Added multi-version support covering Minecraft 1.21 through 1.21.11
+### 2.0.0—1.21.11
+* Updated to Minecraft 1.21.11
+### 1.2.0—1.21.10
+* Added ability to blacklist specific mobs by name to prevent them from appearing on the locator
+* Enter mob names in the config menu (e.g., Creeper, Zombie, Iron Golem)
+* Blacklisted mobs will not render icons on the locator bar
+* Adjusted Arrow Position
+* Redesigned Config Menu
+### 1.1.0—1.21.10
+* Refreshed Mod Icon
+* Updated all core build properties to match the 1.21.10 environment: (Fabric Loader: 0.18.4, Yarn Mappings: 1.21.10+build.3, Fabric Loom: 1.14-SNAPSHOT, Cloth Config API: 20.0.149, ModMenu: 16.0.0)
+* Performed a global cleanup of the codebase across all Java files to strictly adhere to the official FabricMC formatting and naming conventions
+### 1.0.0—1.21.10
+* Initial Release
 </details>
 
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.youtube.com/watch?v=xvFZjo5PgG0)
