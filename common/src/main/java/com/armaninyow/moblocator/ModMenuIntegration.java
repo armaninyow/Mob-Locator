@@ -2,89 +2,106 @@ package com.armaninyow.moblocator;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.shedaniel.clothconfig2.api.ConfigBuilder;
-import me.shedaniel.clothconfig2.api.ConfigCategory;
-import me.shedaniel.clothconfig2.api.ConfigEntryBuilder;
-import net.minecraft.text.Text;
+import dev.isxander.yacl3.api.*;
+import dev.isxander.yacl3.api.controller.BooleanControllerBuilder;
+import dev.isxander.yacl3.api.controller.ColorControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
+import net.minecraft.network.chat.Component;
 
+import java.awt.Color;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ModMenuIntegration implements ModMenuApi {
 
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
 		return parent -> {
-			ConfigBuilder builder = ConfigBuilder.create()
-				.setParentScreen(parent)
-				.setTitle(Text.translatable("moblocator.config.title"));
+			// Build the toggle first so we can reference it for availability
+			Option<Boolean> showInvisibleOption = Option.<Boolean>createBuilder()
+				.name(Component.translatable("moblocator.config.showInvisible"))
+				.description(OptionDescription.of(Component.translatable("moblocator.config.showInvisible.tooltip")))
+				.binding(
+					false,
+					() -> MobLocatorConfig.showInvisibleMobs,
+					val -> MobLocatorConfig.showInvisibleMobs = val
+				)
+				.controller(BooleanControllerBuilder::create)
+				.build();
 
-			builder.setGlobalized(false);
-			builder.setGlobalizedExpanded(false);
+			Option<Color> invisibleColorOption = Option.<Color>createBuilder()
+				.name(Component.translatable("moblocator.config.invisibleColor"))
+				.description(OptionDescription.of(Component.translatable("moblocator.config.invisibleColor.tooltip")))
+				.binding(
+					new Color(0x808080),
+					() -> new Color(MobLocatorConfig.invisibleMobColor),
+					val -> MobLocatorConfig.invisibleMobColor = val.getRGB() & 0xFFFFFF
+				)
+				.controller(ColorControllerBuilder::create)
+				.available(MobLocatorConfig.showInvisibleMobs)
+				.build();
 
-			ConfigEntryBuilder entryBuilder = builder.entryBuilder();
+			// Keep invisible color greyed out in sync with the toggle
+			showInvisibleOption.addListener((opt, val) -> invisibleColorOption.setAvailable(val));
 
-			ConfigCategory settings = builder.getOrCreateCategory(Text.translatable("moblocator.config.settings"));
+			return YetAnotherConfigLib.createBuilder()
+				.title(Component.translatable("moblocator.config.title"))
+				.category(ConfigCategory.createBuilder()
+					.name(Component.translatable("moblocator.config.settings"))
 
-			// Hostile Mob Color
-			settings.addEntry(entryBuilder.startColorField(
-				Text.translatable("moblocator.config.hostileColor"),
-				MobLocatorConfig.hostileMobColor)
-				.setDefaultValue(0xFF0000)
-				.setTooltip(Text.translatable("moblocator.config.hostileColor.tooltip"))
-				.setSaveConsumer(value -> MobLocatorConfig.hostileMobColor = value & 0xFFFFFF)
+					// Hostile Mob Color
+					.option(Option.<Color>createBuilder()
+						.name(Component.translatable("moblocator.config.hostileColor"))
+						.description(OptionDescription.of(Component.translatable("moblocator.config.hostileColor.tooltip")))
+						.binding(
+							new Color(0xFF0000),
+							() -> new Color(MobLocatorConfig.hostileMobColor),
+							val -> MobLocatorConfig.hostileMobColor = val.getRGB() & 0xFFFFFF
+						)
+						.controller(ColorControllerBuilder::create)
+						.build()
+					)
+
+					// Passive Mob Color
+					.option(Option.<Color>createBuilder()
+						.name(Component.translatable("moblocator.config.passiveColor"))
+						.description(OptionDescription.of(Component.translatable("moblocator.config.passiveColor.tooltip")))
+						.binding(
+							new Color(0xFFFFFF),
+							() -> new Color(MobLocatorConfig.passiveMobColor),
+							val -> MobLocatorConfig.passiveMobColor = val.getRGB() & 0xFFFFFF
+						)
+						.controller(ColorControllerBuilder::create)
+						.build()
+					)
+
+					// Show Invisible Mobs toggle
+					.option(showInvisibleOption)
+
+					// Invisible Mob Color (greyed out when show invisible is off)
+					.option(invisibleColorOption)
+
+					// Blacklisted Mobs list
+					.group(ListOption.<String>createBuilder()
+						.name(Component.translatable("moblocator.config.blacklistedMobs"))
+						.description(OptionDescription.of(Component.translatable("moblocator.config.blacklistedMobs.tooltip")))
+						.binding(
+							new ArrayList<>(),
+							() -> new ArrayList<>(MobLocatorConfig.blacklistedMobs),
+							val -> {
+								MobLocatorConfig.blacklistedMobs.clear();
+								MobLocatorConfig.blacklistedMobs.addAll(val);
+							}
+						)
+						.controller(StringControllerBuilder::create)
+						.initial("")
+						.build()
+					)
+
+					.build()
+				)
+				.save(MobLocatorConfig::save)
 				.build()
-			);
-
-			// Passive Mob Color
-			settings.addEntry(entryBuilder.startColorField(
-				Text.translatable("moblocator.config.passiveColor"),
-				MobLocatorConfig.passiveMobColor)
-				.setDefaultValue(0xFFFFFF)
-				.setTooltip(Text.translatable("moblocator.config.passiveColor.tooltip"))
-				.setSaveConsumer(value -> MobLocatorConfig.passiveMobColor = value & 0xFFFFFF)
-				.build()
-			);
-
-			// Show Invisible Mobs toggle
-			settings.addEntry(entryBuilder.startBooleanToggle(
-				Text.translatable("moblocator.config.showInvisible"),
-				MobLocatorConfig.showInvisibleMobs)
-				.setDefaultValue(false)
-				.setTooltip(Text.translatable("moblocator.config.showInvisible.tooltip"))
-				.setSaveConsumer(value -> MobLocatorConfig.showInvisibleMobs = value)
-				.build()
-			);
-
-			// Invisible Mob Color
-			settings.addEntry(entryBuilder.startColorField(
-				Text.translatable("moblocator.config.invisibleColor"),
-				MobLocatorConfig.invisibleMobColor)
-				.setDefaultValue(0x808080)
-				.setTooltip(Text.translatable("moblocator.config.invisibleColor.tooltip"))
-				.setSaveConsumer(value -> MobLocatorConfig.invisibleMobColor = value & 0xFFFFFF)
-				.build()
-			);
-
-			// Blacklisted Mobs list
-			List<String> blacklistCopy = new ArrayList<>(MobLocatorConfig.blacklistedMobs);
-			settings.addEntry(entryBuilder.startStrList(
-				Text.translatable("moblocator.config.blacklistedMobs"),
-				blacklistCopy)
-				.setDefaultValue(new ArrayList<>())
-				.setTooltip(Text.translatable("moblocator.config.blacklistedMobs.tooltip"))
-				.setSaveConsumer(newList -> {
-					MobLocatorConfig.blacklistedMobs.clear();
-					MobLocatorConfig.blacklistedMobs.addAll(newList);
-				})
-				.setExpanded(true)
-				.setInsertInFront(false)
-				.build()
-			);
-
-			builder.setSavingRunnable(MobLocatorConfig::save);
-
-			return builder.build();
+				.generateScreen(parent);
 		};
 	}
 }

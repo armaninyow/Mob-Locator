@@ -1,6 +1,6 @@
 package com.armaninyow.moblocator;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class IconRenderer {
 	private static final int BLACK = 0xFF000000;
@@ -9,7 +9,7 @@ public class IconRenderer {
 	private static final int GREY_LIGHT = 0xFFE0E0E0; // Light grey
 	private static final int GREY_MID = 0xFFBCBCBD;   // Mid grey
 
-	public static void drawIcon(DrawContext context, int centerX, int centerY, int iconType, int baseColor) {
+	public static void drawIcon(GuiGraphicsExtractor context, int centerX, int centerY, int iconType, int baseColor) {
 		// Add full alpha to the base color
 		int color = baseColor | 0xFF000000;
 
@@ -21,7 +21,7 @@ public class IconRenderer {
 		}
 	}
 
-	public static void drawArrow(DrawContext context, int centerX, int centerY, boolean pointingUp, int baseColor) {
+	public static void drawArrow(GuiGraphicsExtractor context, int centerX, int centerY, boolean pointingUp, int baseColor) {
 		int color = baseColor | 0xFF000000;
 
 		if (pointingUp) {
@@ -32,7 +32,7 @@ public class IconRenderer {
 	}
 
 	// Small Circle - 3x3
-	private static void drawSmallCircle(DrawContext context, int cx, int cy, int color) {
+	private static void drawSmallCircle(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 1;
 		int startY = cy - 1;
 
@@ -55,7 +55,7 @@ public class IconRenderer {
 	}
 
 	// Small Square - 5x5
-	private static void drawSmallSquare(DrawContext context, int cx, int cy, int color) {
+	private static void drawSmallSquare(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 2;
 		int startY = cy - 2;
 
@@ -80,7 +80,7 @@ public class IconRenderer {
 	}
 
 	// Large Circle - 7x7
-	private static void drawLargeCircle(DrawContext context, int cx, int cy, int color) {
+	private static void drawLargeCircle(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
@@ -123,7 +123,7 @@ public class IconRenderer {
 	}
 
 	// Large Square - 7x7
-	private static void drawLargeSquare(DrawContext context, int cx, int cy, int color) {
+	private static void drawLargeSquare(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
@@ -175,10 +175,9 @@ public class IconRenderer {
 	}
 
 	// Arrow Up - 7x4
-	// ARROW POSITION ADJUSTMENT: Moved 1 pixel up (startY changed from cy - 2 to cy - 3)
-	private static void drawArrowUp(DrawContext context, int cx, int cy, int color) {
+	private static void drawArrowUp(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 3;
-		int startY = cy - 3; // Changed from cy - 2 to move arrow up by 1 pixel
+		int startY = cy - 3;
 
 		// Row 0: transparent, transparent, black, black, black, transparent, transparent
 		pixel(context, startX + 2, startY + 0, BLACK);
@@ -208,10 +207,9 @@ public class IconRenderer {
 	}
 
 	// Arrow Down - 7x4
-	// ARROW POSITION ADJUSTMENT: Moved 1 pixel down (startY changed from cy - 2 to cy - 1)
-	private static void drawArrowDown(DrawContext context, int cx, int cy, int color) {
+	private static void drawArrowDown(GuiGraphicsExtractor context, int cx, int cy, int color) {
 		int startX = cx - 3;
-		int startY = cy - 1; // Changed from cy - 2 to move arrow down by 1 pixel
+		int startY = cy - 1;
 
 		// Row 0: black, black, black, black, black, black, black
 		for (int x = 0; x <= 6; x++) {
@@ -241,7 +239,7 @@ public class IconRenderer {
 	}
 
 	// Helper: Draw a single pixel
-	private static void pixel(DrawContext context, int x, int y, int color) {
+	private static void pixel(GuiGraphicsExtractor context, int x, int y, int color) {
 		context.fill(x, y, x + 1, y + 1, color);
 	}
 
