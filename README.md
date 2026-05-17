@@ -19,6 +19,9 @@ If you encounter bugs or wish to contribute:
 <details>
   <summary></summary>
    
+### 4.0.0—26.x
+* Added support for Minecraft 26.1, 26.1.1, and 26.1.2
+* Replaced Cloth Config with YetAnotherConfigLib (YACL) 3.9.3 for the in-game config screen
 ### 3.1.0—1.21.x
 * Merged 1.21–1.21.3 into a single version range to account for API differences from later versions
 * Split 1.21.4–1.21.5 into its own version range to account for API differences from 1.21.6 and above
