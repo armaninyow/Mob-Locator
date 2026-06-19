@@ -1,14 +1,32 @@
 {
 	"moblocator.config.title": "Mob Locator Configuration",
+
 	"moblocator.config.settings": "Settings",
+
+	"moblocator.config.usePerMobColors": "Use Per-Mob Colors",
+	"moblocator.config.usePerMobColors.tooltip": "When enabled, use each mob's individual color as the icon fill color instead of the global Hostile/Passive colors.",
+
+	"moblocator.config.useBlackOutlines": "Use Black Outlines",
+	"moblocator.config.useBlackOutlines.tooltip": "When enabled, use black outlines instead of the Hostile/Passive colors.",
+
 	"moblocator.config.hostileColor": "Hostile Mob Color",
-	"moblocator.config.hostileColor.tooltip": "Color for hostile/enemy mobs",
+	"moblocator.config.hostileColor.tooltip": "Color for hostile mobs and neutral mobs when provoked.",
+
 	"moblocator.config.passiveColor": "Passive Mob Color",
-	"moblocator.config.passiveColor.tooltip": "Color for passive/friendly mobs",
+	"moblocator.config.passiveColor.tooltip": "Color for friendly mobs and neutral mobs until provoked.",
+
 	"moblocator.config.showInvisible": "Show Invisible Mobs",
-	"moblocator.config.showInvisible.tooltip": "Show invisible mobs on the locator bar",
+	"moblocator.config.showInvisible.tooltip": "When enabled, show invisible mobs.",
+
 	"moblocator.config.invisibleColor": "Invisible Mob Color",
-	"moblocator.config.invisibleColor.tooltip": "Color for invisible mobs when shown",
+	"moblocator.config.invisibleColor.tooltip": "Outline color for invisible mobs when shown, overriding the normal outline.\n\nGreyed out when Show Invisible Mobs is disabled.",
+
 	"moblocator.config.blacklistedMobs": "Blacklisted Mobs",
-	"moblocator.config.blacklistedMobs.tooltip": "Add mob names to prevent them from showing\non the locator (e.g., Creeper, Iron Golem)"
+	"moblocator.config.blacklistedMobs.tooltip": "Add mob names to prevent them from showing on the locator bar.\n\nUse the display name exactly as it appears in-game (e.g. Creeper, Iron Golem, Cave Spider).",
+
+	"moblocator.config.perMobColors.tab": "Per-Mob Colors",
+	"moblocator.config.perMobColors.tab.tooltip": "Customize the icon fill color for each individual mob.\n\nOnly active when Use Per-Mob Colors is enabled in the Settings tab.",
+
+	"moblocator.config.perMobColors": "Mob Color Entries",
+	"moblocator.config.perMobColors.tooltip": "Each entry sets the fill color for one mob.\n\nFormat: Mob Name=#RRGGBB\nExample: Creeper=#0DA70B\n\nUse the mob's display name exactly as it appears in-game."
 }

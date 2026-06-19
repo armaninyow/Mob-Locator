@@ -3,247 +3,274 @@ package com.armaninyow.moblocator;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class IconRenderer {
-	private static final int BLACK = 0xFF000000;
-
 	// Grey shades for anti-aliasing (will be blended with config color)
 	private static final int GREY_LIGHT = 0xFFE0E0E0; // Light grey
-	private static final int GREY_MID = 0xFFBCBCBD;   // Mid grey
+	private static final int GREY_MID   = 0xFFBCBCBD; // Mid grey
 
-	public static void drawIcon(GuiGraphicsExtractor context, int centerX, int centerY, int iconType, int baseColor) {
-		// Add full alpha to the base color
-		int color = baseColor | 0xFF000000;
+	/**
+	 * Draw an icon with a specific outline color.
+	 * outlineColor should already have full alpha (0xFF______).
+	 */
+	public static void drawIcon(GuiGraphicsExtractor context, int centerX, int centerY,
+	                            int iconType, int baseColor, int outlineColor) {
+		int color   = baseColor   | 0xFF000000;
+		int outline = outlineColor | 0xFF000000;
 
 		switch (iconType) {
-			case 0 -> drawSmallCircle(context, centerX, centerY, color);
-			case 1 -> drawSmallSquare(context, centerX, centerY, color);
-			case 2 -> drawLargeCircle(context, centerX, centerY, color);
-			case 3 -> drawLargeSquare(context, centerX, centerY, color);
+			case 0 -> drawSmallCircle(context, centerX, centerY, color, outline);
+			case 1 -> drawSmallSquare(context, centerX, centerY, color, outline);
+			case 2 -> drawLargeCircle(context, centerX, centerY, color, outline);
+			case 3 -> drawLargeSquare(context, centerX, centerY, color, outline);
 		}
 	}
 
-	public static void drawArrow(GuiGraphicsExtractor context, int centerX, int centerY, boolean pointingUp, int baseColor) {
-		int color = baseColor | 0xFF000000;
+	/**
+	 * Draw an arrow with a specific outline color.
+	 */
+	public static void drawArrow(GuiGraphicsExtractor context, int centerX, int centerY,
+	                             boolean pointingUp, int baseColor, int outlineColor) {
+		int color   = baseColor   | 0xFF000000;
+		int outline = outlineColor | 0xFF000000;
 
 		if (pointingUp) {
-			drawArrowUp(context, centerX, centerY, color);
+			drawArrowUp(context, centerX, centerY, color, outline);
 		} else {
-			drawArrowDown(context, centerX, centerY, color);
+			drawArrowDown(context, centerX, centerY, color, outline);
 		}
 	}
 
+	// -------------------------------------------------------------------------
 	// Small Circle - 3x3
-	private static void drawSmallCircle(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawSmallCircle(GuiGraphicsExtractor context, int cx, int cy,
+	                                    int color, int outline) {
 		int startX = cx - 1;
 		int startY = cy - 1;
 
 		int grey = blendColor(color, GREY_MID);
 
-		// Row 0: black, grey, black
-		pixel(context, startX + 0, startY + 0, BLACK);
+		// Row 0: outline, grey, outline
+		pixel(context, startX + 0, startY + 0, outline);
 		pixel(context, startX + 1, startY + 0, grey);
-		pixel(context, startX + 2, startY + 0, BLACK);
+		pixel(context, startX + 2, startY + 0, outline);
 
-		// Row 1: grey, white, grey
+		// Row 1: grey, fill, grey
 		pixel(context, startX + 0, startY + 1, grey);
 		pixel(context, startX + 1, startY + 1, color);
 		pixel(context, startX + 2, startY + 1, grey);
 
-		// Row 2: black, grey, black
-		pixel(context, startX + 0, startY + 2, BLACK);
+		// Row 2: outline, grey, outline
+		pixel(context, startX + 0, startY + 2, outline);
 		pixel(context, startX + 1, startY + 2, grey);
-		pixel(context, startX + 2, startY + 2, BLACK);
+		pixel(context, startX + 2, startY + 2, outline);
 	}
 
+	// -------------------------------------------------------------------------
 	// Small Square - 5x5
-	private static void drawSmallSquare(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawSmallSquare(GuiGraphicsExtractor context, int cx, int cy,
+	                                    int color, int outline) {
 		int startX = cx - 2;
 		int startY = cy - 2;
 
-		// Row 0: transparent, black, black, black, transparent
-		pixel(context, startX + 1, startY + 0, BLACK);
-		pixel(context, startX + 2, startY + 0, BLACK);
-		pixel(context, startX + 3, startY + 0, BLACK);
+		// Row 0: outline x3
+		pixel(context, startX + 1, startY + 0, outline);
+		pixel(context, startX + 2, startY + 0, outline);
+		pixel(context, startX + 3, startY + 0, outline);
 
-		// Row 1-3: black, white, white, white, black
+		// Row 1-3: outline, fill x3, outline
 		for (int row = 1; row <= 3; row++) {
-			pixel(context, startX + 0, startY + row, BLACK);
+			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, color);
 			pixel(context, startX + 2, startY + row, color);
 			pixel(context, startX + 3, startY + row, color);
-			pixel(context, startX + 4, startY + row, BLACK);
+			pixel(context, startX + 4, startY + row, outline);
 		}
 
-		// Row 4: transparent, black, black, black, transparent
-		pixel(context, startX + 1, startY + 4, BLACK);
-		pixel(context, startX + 2, startY + 4, BLACK);
-		pixel(context, startX + 3, startY + 4, BLACK);
+		// Row 4: outline x3
+		pixel(context, startX + 1, startY + 4, outline);
+		pixel(context, startX + 2, startY + 4, outline);
+		pixel(context, startX + 3, startY + 4, outline);
 	}
 
+	// -------------------------------------------------------------------------
 	// Large Circle - 7x7
-	private static void drawLargeCircle(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawLargeCircle(GuiGraphicsExtractor context, int cx, int cy,
+	                                    int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
 		int grey = blendColor(color, GREY_MID);
 
-		// Row 0: transparent, transparent, black, black, black, transparent, transparent
-		pixel(context, startX + 2, startY + 0, BLACK);
-		pixel(context, startX + 3, startY + 0, BLACK);
-		pixel(context, startX + 4, startY + 0, BLACK);
+		// Row 0
+		pixel(context, startX + 2, startY + 0, outline);
+		pixel(context, startX + 3, startY + 0, outline);
+		pixel(context, startX + 4, startY + 0, outline);
 
-		// Row 1: transparent, black, grey, grey, grey, black, transparent
-		pixel(context, startX + 1, startY + 1, BLACK);
+		// Row 1
+		pixel(context, startX + 1, startY + 1, outline);
 		pixel(context, startX + 2, startY + 1, grey);
 		pixel(context, startX + 3, startY + 1, grey);
 		pixel(context, startX + 4, startY + 1, grey);
-		pixel(context, startX + 5, startY + 1, BLACK);
+		pixel(context, startX + 5, startY + 1, outline);
 
-		// Row 2-4: black, grey, white, white, white, grey, black
+		// Row 2-4
 		for (int row = 2; row <= 4; row++) {
-			pixel(context, startX + 0, startY + row, BLACK);
+			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, grey);
 			pixel(context, startX + 2, startY + row, color);
 			pixel(context, startX + 3, startY + row, color);
 			pixel(context, startX + 4, startY + row, color);
 			pixel(context, startX + 5, startY + row, grey);
-			pixel(context, startX + 6, startY + row, BLACK);
+			pixel(context, startX + 6, startY + row, outline);
 		}
 
-		// Row 5: transparent, black, grey, grey, grey, black, transparent
-		pixel(context, startX + 1, startY + 5, BLACK);
+		// Row 5
+		pixel(context, startX + 1, startY + 5, outline);
 		pixel(context, startX + 2, startY + 5, grey);
 		pixel(context, startX + 3, startY + 5, grey);
 		pixel(context, startX + 4, startY + 5, grey);
-		pixel(context, startX + 5, startY + 5, BLACK);
+		pixel(context, startX + 5, startY + 5, outline);
 
-		// Row 6: transparent, transparent, black, black, black, transparent, transparent
-		pixel(context, startX + 2, startY + 6, BLACK);
-		pixel(context, startX + 3, startY + 6, BLACK);
-		pixel(context, startX + 4, startY + 6, BLACK);
+		// Row 6
+		pixel(context, startX + 2, startY + 6, outline);
+		pixel(context, startX + 3, startY + 6, outline);
+		pixel(context, startX + 4, startY + 6, outline);
 	}
 
+	// -------------------------------------------------------------------------
 	// Large Square - 7x7
-	private static void drawLargeSquare(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawLargeSquare(GuiGraphicsExtractor context, int cx, int cy,
+	                                    int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
 		int greyLight = blendColor(color, GREY_LIGHT);
-		int greyMid = blendColor(color, GREY_MID);
+		int greyMid   = blendColor(color, GREY_MID);
 
-		// Row 0: transparent, black, black, black, black, black, transparent
-		pixel(context, startX + 1, startY + 0, BLACK);
-		pixel(context, startX + 2, startY + 0, BLACK);
-		pixel(context, startX + 3, startY + 0, BLACK);
-		pixel(context, startX + 4, startY + 0, BLACK);
-		pixel(context, startX + 5, startY + 0, BLACK);
+		// Row 0
+		pixel(context, startX + 1, startY + 0, outline);
+		pixel(context, startX + 2, startY + 0, outline);
+		pixel(context, startX + 3, startY + 0, outline);
+		pixel(context, startX + 4, startY + 0, outline);
+		pixel(context, startX + 5, startY + 0, outline);
 
-		// Row 1: black, grey, light, light, light, grey, black
-		pixel(context, startX + 0, startY + 1, BLACK);
+		// Row 1
+		pixel(context, startX + 0, startY + 1, outline);
 		pixel(context, startX + 1, startY + 1, greyMid);
 		pixel(context, startX + 2, startY + 1, greyLight);
 		pixel(context, startX + 3, startY + 1, greyLight);
 		pixel(context, startX + 4, startY + 1, greyLight);
 		pixel(context, startX + 5, startY + 1, greyMid);
-		pixel(context, startX + 6, startY + 1, BLACK);
+		pixel(context, startX + 6, startY + 1, outline);
 
-		// Row 2-4: black, light, white, white, white, light, black
+		// Row 2-4
 		for (int row = 2; row <= 4; row++) {
-			pixel(context, startX + 0, startY + row, BLACK);
+			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, greyLight);
 			pixel(context, startX + 2, startY + row, color);
 			pixel(context, startX + 3, startY + row, color);
 			pixel(context, startX + 4, startY + row, color);
 			pixel(context, startX + 5, startY + row, greyLight);
-			pixel(context, startX + 6, startY + row, BLACK);
+			pixel(context, startX + 6, startY + row, outline);
 		}
 
-		// Row 5: black, grey, light, light, light, grey, black
-		pixel(context, startX + 0, startY + 5, BLACK);
+		// Row 5
+		pixel(context, startX + 0, startY + 5, outline);
 		pixel(context, startX + 1, startY + 5, greyMid);
 		pixel(context, startX + 2, startY + 5, greyLight);
 		pixel(context, startX + 3, startY + 5, greyLight);
 		pixel(context, startX + 4, startY + 5, greyLight);
 		pixel(context, startX + 5, startY + 5, greyMid);
-		pixel(context, startX + 6, startY + 5, BLACK);
+		pixel(context, startX + 6, startY + 5, outline);
 
-		// Row 6: transparent, black, black, black, black, black, transparent
-		pixel(context, startX + 1, startY + 6, BLACK);
-		pixel(context, startX + 2, startY + 6, BLACK);
-		pixel(context, startX + 3, startY + 6, BLACK);
-		pixel(context, startX + 4, startY + 6, BLACK);
-		pixel(context, startX + 5, startY + 6, BLACK);
+		// Row 6
+		pixel(context, startX + 1, startY + 6, outline);
+		pixel(context, startX + 2, startY + 6, outline);
+		pixel(context, startX + 3, startY + 6, outline);
+		pixel(context, startX + 4, startY + 6, outline);
+		pixel(context, startX + 5, startY + 6, outline);
 	}
 
+	// -------------------------------------------------------------------------
 	// Arrow Up - 7x4
-	private static void drawArrowUp(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawArrowUp(GuiGraphicsExtractor context, int cx, int cy,
+	                                int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
-		// Row 0: transparent, transparent, black, black, black, transparent, transparent
-		pixel(context, startX + 2, startY + 0, BLACK);
-		pixel(context, startX + 3, startY + 0, BLACK);
-		pixel(context, startX + 4, startY + 0, BLACK);
+		// Row 0
+		pixel(context, startX + 2, startY + 0, outline);
+		pixel(context, startX + 3, startY + 0, outline);
+		pixel(context, startX + 4, startY + 0, outline);
 
-		// Row 1: transparent, black, white, white, white, black, transparent
-		pixel(context, startX + 1, startY + 1, BLACK);
+		// Row 1
+		pixel(context, startX + 1, startY + 1, outline);
 		pixel(context, startX + 2, startY + 1, color);
 		pixel(context, startX + 3, startY + 1, color);
 		pixel(context, startX + 4, startY + 1, color);
-		pixel(context, startX + 5, startY + 1, BLACK);
+		pixel(context, startX + 5, startY + 1, outline);
 
-		// Row 2: black, white, white, white, white, white, black
-		pixel(context, startX + 0, startY + 2, BLACK);
+		// Row 2
+		pixel(context, startX + 0, startY + 2, outline);
 		pixel(context, startX + 1, startY + 2, color);
 		pixel(context, startX + 2, startY + 2, color);
 		pixel(context, startX + 3, startY + 2, color);
 		pixel(context, startX + 4, startY + 2, color);
 		pixel(context, startX + 5, startY + 2, color);
-		pixel(context, startX + 6, startY + 2, BLACK);
+		pixel(context, startX + 6, startY + 2, outline);
 
-		// Row 3: black, black, black, black, black, black, black
+		// Row 3: full outline bar
 		for (int x = 0; x <= 6; x++) {
-			pixel(context, startX + x, startY + 3, BLACK);
+			pixel(context, startX + x, startY + 3, outline);
 		}
 	}
 
+	// -------------------------------------------------------------------------
 	// Arrow Down - 7x4
-	private static void drawArrowDown(GuiGraphicsExtractor context, int cx, int cy, int color) {
+	// -------------------------------------------------------------------------
+	private static void drawArrowDown(GuiGraphicsExtractor context, int cx, int cy,
+	                                  int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 1;
 
-		// Row 0: black, black, black, black, black, black, black
+		// Row 0: full outline bar
 		for (int x = 0; x <= 6; x++) {
-			pixel(context, startX + x, startY + 0, BLACK);
+			pixel(context, startX + x, startY + 0, outline);
 		}
 
-		// Row 1: black, white, white, white, white, white, black
-		pixel(context, startX + 0, startY + 1, BLACK);
+		// Row 1
+		pixel(context, startX + 0, startY + 1, outline);
 		pixel(context, startX + 1, startY + 1, color);
 		pixel(context, startX + 2, startY + 1, color);
 		pixel(context, startX + 3, startY + 1, color);
 		pixel(context, startX + 4, startY + 1, color);
 		pixel(context, startX + 5, startY + 1, color);
-		pixel(context, startX + 6, startY + 1, BLACK);
+		pixel(context, startX + 6, startY + 1, outline);
 
-		// Row 2: transparent, black, white, white, white, black, transparent
-		pixel(context, startX + 1, startY + 2, BLACK);
+		// Row 2
+		pixel(context, startX + 1, startY + 2, outline);
 		pixel(context, startX + 2, startY + 2, color);
 		pixel(context, startX + 3, startY + 2, color);
 		pixel(context, startX + 4, startY + 2, color);
-		pixel(context, startX + 5, startY + 2, BLACK);
+		pixel(context, startX + 5, startY + 2, outline);
 
-		// Row 3: transparent, transparent, black, black, black, transparent, transparent
-		pixel(context, startX + 2, startY + 3, BLACK);
-		pixel(context, startX + 3, startY + 3, BLACK);
-		pixel(context, startX + 4, startY + 3, BLACK);
+		// Row 3
+		pixel(context, startX + 2, startY + 3, outline);
+		pixel(context, startX + 3, startY + 3, outline);
+		pixel(context, startX + 4, startY + 3, outline);
 	}
 
-	// Helper: Draw a single pixel
+	// -------------------------------------------------------------------------
+	// Helpers
+	// -------------------------------------------------------------------------
 	private static void pixel(GuiGraphicsExtractor context, int x, int y, int color) {
 		context.fill(x, y, x + 1, y + 1, color);
 	}
 
-	// Helper: Blend config color with grey for anti-aliasing
 	private static int blendColor(int color, int grey) {
 		int r = (color >> 16) & 0xFF;
 		int g = (color >> 8) & 0xFF;

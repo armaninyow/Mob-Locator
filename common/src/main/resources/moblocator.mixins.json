@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.armaninyow.moblocator.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"MobTargetMixin",
+		"NautilusAngerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
