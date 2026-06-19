@@ -19,6 +19,10 @@ If you encounter bugs or wish to contribute:
 <details>
   <summary></summary>
    
+### 4.1.0—26.x
+* Added a "Use Per-Mob Colors" option that gives each mob its own unique color based on its real in-game appearance, instead of one shared color for all hostile or passive mobs
+* Updated the Invisible Mob Color setting since invisible mobs can be either hostile or passive and shouldn't share one fixed color, now it only affects the outline color instead of fill color, so invisible mobs stand out without losing their hostile or passive fill color
+* Fixed neutral mobs so they now properly turn red when they're actually aggressive, instead of staying their default color or always showing as hostile
 ### 4.0.0—26.x
 * Added support for Minecraft 26.1, 26.1.1, and 26.1.2
 * Replaced Cloth Config with YetAnotherConfigLib (YACL) 3.9.3 for the in-game config screen
