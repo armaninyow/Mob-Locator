@@ -19,9 +19,6 @@ public class ModMenuIntegration implements ModMenuApi {
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
 		return parent -> {
 
-			// ----------------------------------------------------------------
-			// usePerMobColors toggle (top)
-			// ----------------------------------------------------------------
 			Option<Boolean> usePerMobColorsOption = Option.<Boolean>createBuilder()
 				.name(Component.translatable("moblocator.config.usePerMobColors"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.usePerMobColors.tooltip")))
@@ -33,10 +30,6 @@ public class ModMenuIntegration implements ModMenuApi {
 				.controller(BooleanControllerBuilder::create)
 				.build();
 
-			// ----------------------------------------------------------------
-			// useTypeColorsForOutlines toggle
-			// Available only when usePerMobColors is ON
-			// ----------------------------------------------------------------
 			Option<Boolean> useBlackOutlinesOption = Option.<Boolean>createBuilder()
 				.name(Component.translatable("moblocator.config.useBlackOutlines"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.useBlackOutlines.tooltip")))
@@ -51,9 +44,6 @@ public class ModMenuIntegration implements ModMenuApi {
 
 			usePerMobColorsOption.addListener((opt, val) -> useBlackOutlinesOption.setAvailable(val));
 
-			// ----------------------------------------------------------------
-			// showInvisibleMobs toggle
-			// ----------------------------------------------------------------
 			Option<Boolean> showInvisibleOption = Option.<Boolean>createBuilder()
 				.name(Component.translatable("moblocator.config.showInvisible"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.showInvisible.tooltip")))
@@ -65,9 +55,6 @@ public class ModMenuIntegration implements ModMenuApi {
 				.controller(BooleanControllerBuilder::create)
 				.build();
 
-			// ----------------------------------------------------------------
-			// Hostile color — always available
-			// ----------------------------------------------------------------
 			Option<Color> hostileColorOption = Option.<Color>createBuilder()
 				.name(Component.translatable("moblocator.config.hostileColor"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.hostileColor.tooltip")))
@@ -79,9 +66,6 @@ public class ModMenuIntegration implements ModMenuApi {
 				.controller(ColorControllerBuilder::create)
 				.build();
 
-			// ----------------------------------------------------------------
-			// Passive color — always available
-			// ----------------------------------------------------------------
 			Option<Color> passiveColorOption = Option.<Color>createBuilder()
 				.name(Component.translatable("moblocator.config.passiveColor"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.passiveColor.tooltip")))
@@ -93,9 +77,6 @@ public class ModMenuIntegration implements ModMenuApi {
 				.controller(ColorControllerBuilder::create)
 				.build();
 
-			// ----------------------------------------------------------------
-			// Invisible color (outline-only) — greyed out when showInvisibleMobs is OFF
-			// ----------------------------------------------------------------
 			Option<Color> invisibleColorOption = Option.<Color>createBuilder()
 				.name(Component.translatable("moblocator.config.invisibleColor"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.invisibleColor.tooltip")))
@@ -108,18 +89,8 @@ public class ModMenuIntegration implements ModMenuApi {
 				.available(MobLocatorConfig.showInvisibleMobs)
 				.build();
 
-			// ----------------------------------------------------------------
-			// Listeners to keep availability in sync
-			// ----------------------------------------------------------------
-
-			// invisibleColor available only when showInvisibleMobs is ON
 			showInvisibleOption.addListener((opt, val) -> invisibleColorOption.setAvailable(val));
 
-			// ----------------------------------------------------------------
-			// Per-mob color list
-			// Each entry is "Mob Name=#RRGGBB", editable as a string list
-			// Available only when usePerMobColors is ON
-			// ----------------------------------------------------------------
 			List<String> defaultPerMobList = buildPerMobStringList(MobLocatorConfig.DEFAULT_PER_MOB_COLORS);
 
 			ListOption<String> perMobColorList = ListOption.<String>createBuilder()
@@ -137,9 +108,6 @@ public class ModMenuIntegration implements ModMenuApi {
 
 			usePerMobColorsOption.addListener((opt, val) -> perMobColorList.setAvailable(val));
 
-			// ----------------------------------------------------------------
-			// Blacklisted mobs list (Settings tab)
-			// ----------------------------------------------------------------
 			ListOption<String> blacklistOption = ListOption.<String>createBuilder()
 				.name(Component.translatable("moblocator.config.blacklistedMobs"))
 				.description(OptionDescription.of(Component.translatable("moblocator.config.blacklistedMobs.tooltip")))
@@ -155,41 +123,29 @@ public class ModMenuIntegration implements ModMenuApi {
 				.initial("")
 				.build();
 
-			// ----------------------------------------------------------------
-			// Build screen — two tabs: Settings | Per-Mob Colors
-			// ----------------------------------------------------------------
 			return YetAnotherConfigLib.createBuilder()
 				.title(Component.translatable("moblocator.config.title"))
 
-				// Tab 1: Settings
 				.category(ConfigCategory.createBuilder()
 					.name(Component.translatable("moblocator.config.settings"))
 
-					// 1. Use Per-Mob Colors toggle (top)
 					.option(usePerMobColorsOption)
 
-					// 2. Use Black Outlines
 					.option(useBlackOutlinesOption)
 
-					// 3. Hostile Mob Color
 					.option(hostileColorOption)
 
-					// 4. Passive Mob Color
 					.option(passiveColorOption)
 
-					// 5. Show Invisible Mobs toggle
 					.option(showInvisibleOption)
 
-					// 6. Invisible Mob Color (outline)
 					.option(invisibleColorOption)
 
-					// 7. Blacklisted mobs
 					.group(blacklistOption)
 
 					.build()
 				)
 
-				// Tab 2: Per-Mob Colors
 				.category(ConfigCategory.createBuilder()
 					.name(Component.translatable("moblocator.config.perMobColors.tab"))
 					.tooltip(Component.translatable("moblocator.config.perMobColors.tab.tooltip"))
@@ -205,10 +161,6 @@ public class ModMenuIntegration implements ModMenuApi {
 		};
 	}
 
-	// -------------------------------------------------------------------------
-	// Helpers: convert Map<String,Integer> <-> List<String> "Name=#RRGGBB"
-	// -------------------------------------------------------------------------
-
 	private static List<String> buildPerMobStringList(Map<String, Integer> map) {
 		List<String> list = new ArrayList<>();
 		for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -218,7 +170,6 @@ public class ModMenuIntegration implements ModMenuApi {
 	}
 
 	private static void applyPerMobStringList(List<String> list) {
-		// Keep defaults for anything not overridden
 		MobLocatorConfig.perMobColors.clear();
 		MobLocatorConfig.perMobColors.putAll(MobLocatorConfig.DEFAULT_PER_MOB_COLORS);
 
@@ -232,7 +183,6 @@ public class ModMenuIntegration implements ModMenuApi {
 				int color = Integer.parseInt(hex, 16) & 0xFFFFFF;
 				MobLocatorConfig.perMobColors.put(name, color);
 			} catch (NumberFormatException ignored) {
-				// skip malformed entries
 			}
 		}
 	}

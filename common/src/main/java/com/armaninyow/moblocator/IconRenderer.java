@@ -3,14 +3,9 @@ package com.armaninyow.moblocator;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class IconRenderer {
-	// Grey shades for anti-aliasing (will be blended with config color)
-	private static final int GREY_LIGHT = 0xFFE0E0E0; // Light grey
-	private static final int GREY_MID   = 0xFFBCBCBD; // Mid grey
+	private static final int GREY_LIGHT = 0xFFE0E0E0;
+	private static final int GREY_MID   = 0xFFBCBCBD;
 
-	/**
-	 * Draw an icon with a specific outline color.
-	 * outlineColor should already have full alpha (0xFF______).
-	 */
 	public static void drawIcon(GuiGraphicsExtractor context, int centerX, int centerY,
 	                            int iconType, int baseColor, int outlineColor) {
 		int color   = baseColor   | 0xFF000000;
@@ -24,9 +19,6 @@ public class IconRenderer {
 		}
 	}
 
-	/**
-	 * Draw an arrow with a specific outline color.
-	 */
 	public static void drawArrow(GuiGraphicsExtractor context, int centerX, int centerY,
 	                             boolean pointingUp, int baseColor, int outlineColor) {
 		int color   = baseColor   | 0xFF000000;
@@ -39,9 +31,6 @@ public class IconRenderer {
 		}
 	}
 
-	// -------------------------------------------------------------------------
-	// Small Circle - 3x3
-	// -------------------------------------------------------------------------
 	private static void drawSmallCircle(GuiGraphicsExtractor context, int cx, int cy,
 	                                    int color, int outline) {
 		int startX = cx - 1;
@@ -49,36 +38,28 @@ public class IconRenderer {
 
 		int grey = blendColor(color, GREY_MID);
 
-		// Row 0: outline, grey, outline
 		pixel(context, startX + 0, startY + 0, outline);
 		pixel(context, startX + 1, startY + 0, grey);
 		pixel(context, startX + 2, startY + 0, outline);
 
-		// Row 1: grey, fill, grey
 		pixel(context, startX + 0, startY + 1, grey);
 		pixel(context, startX + 1, startY + 1, color);
 		pixel(context, startX + 2, startY + 1, grey);
 
-		// Row 2: outline, grey, outline
 		pixel(context, startX + 0, startY + 2, outline);
 		pixel(context, startX + 1, startY + 2, grey);
 		pixel(context, startX + 2, startY + 2, outline);
 	}
 
-	// -------------------------------------------------------------------------
-	// Small Square - 5x5
-	// -------------------------------------------------------------------------
 	private static void drawSmallSquare(GuiGraphicsExtractor context, int cx, int cy,
 	                                    int color, int outline) {
 		int startX = cx - 2;
 		int startY = cy - 2;
 
-		// Row 0: outline x3
 		pixel(context, startX + 1, startY + 0, outline);
 		pixel(context, startX + 2, startY + 0, outline);
 		pixel(context, startX + 3, startY + 0, outline);
 
-		// Row 1-3: outline, fill x3, outline
 		for (int row = 1; row <= 3; row++) {
 			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, color);
@@ -87,15 +68,11 @@ public class IconRenderer {
 			pixel(context, startX + 4, startY + row, outline);
 		}
 
-		// Row 4: outline x3
 		pixel(context, startX + 1, startY + 4, outline);
 		pixel(context, startX + 2, startY + 4, outline);
 		pixel(context, startX + 3, startY + 4, outline);
 	}
 
-	// -------------------------------------------------------------------------
-	// Large Circle - 7x7
-	// -------------------------------------------------------------------------
 	private static void drawLargeCircle(GuiGraphicsExtractor context, int cx, int cy,
 	                                    int color, int outline) {
 		int startX = cx - 3;
@@ -103,19 +80,16 @@ public class IconRenderer {
 
 		int grey = blendColor(color, GREY_MID);
 
-		// Row 0
 		pixel(context, startX + 2, startY + 0, outline);
 		pixel(context, startX + 3, startY + 0, outline);
 		pixel(context, startX + 4, startY + 0, outline);
 
-		// Row 1
 		pixel(context, startX + 1, startY + 1, outline);
 		pixel(context, startX + 2, startY + 1, grey);
 		pixel(context, startX + 3, startY + 1, grey);
 		pixel(context, startX + 4, startY + 1, grey);
 		pixel(context, startX + 5, startY + 1, outline);
 
-		// Row 2-4
 		for (int row = 2; row <= 4; row++) {
 			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, grey);
@@ -126,22 +100,17 @@ public class IconRenderer {
 			pixel(context, startX + 6, startY + row, outline);
 		}
 
-		// Row 5
 		pixel(context, startX + 1, startY + 5, outline);
 		pixel(context, startX + 2, startY + 5, grey);
 		pixel(context, startX + 3, startY + 5, grey);
 		pixel(context, startX + 4, startY + 5, grey);
 		pixel(context, startX + 5, startY + 5, outline);
 
-		// Row 6
 		pixel(context, startX + 2, startY + 6, outline);
 		pixel(context, startX + 3, startY + 6, outline);
 		pixel(context, startX + 4, startY + 6, outline);
 	}
 
-	// -------------------------------------------------------------------------
-	// Large Square - 7x7
-	// -------------------------------------------------------------------------
 	private static void drawLargeSquare(GuiGraphicsExtractor context, int cx, int cy,
 	                                    int color, int outline) {
 		int startX = cx - 3;
@@ -150,14 +119,12 @@ public class IconRenderer {
 		int greyLight = blendColor(color, GREY_LIGHT);
 		int greyMid   = blendColor(color, GREY_MID);
 
-		// Row 0
 		pixel(context, startX + 1, startY + 0, outline);
 		pixel(context, startX + 2, startY + 0, outline);
 		pixel(context, startX + 3, startY + 0, outline);
 		pixel(context, startX + 4, startY + 0, outline);
 		pixel(context, startX + 5, startY + 0, outline);
 
-		// Row 1
 		pixel(context, startX + 0, startY + 1, outline);
 		pixel(context, startX + 1, startY + 1, greyMid);
 		pixel(context, startX + 2, startY + 1, greyLight);
@@ -166,7 +133,6 @@ public class IconRenderer {
 		pixel(context, startX + 5, startY + 1, greyMid);
 		pixel(context, startX + 6, startY + 1, outline);
 
-		// Row 2-4
 		for (int row = 2; row <= 4; row++) {
 			pixel(context, startX + 0, startY + row, outline);
 			pixel(context, startX + 1, startY + row, greyLight);
@@ -177,7 +143,6 @@ public class IconRenderer {
 			pixel(context, startX + 6, startY + row, outline);
 		}
 
-		// Row 5
 		pixel(context, startX + 0, startY + 5, outline);
 		pixel(context, startX + 1, startY + 5, greyMid);
 		pixel(context, startX + 2, startY + 5, greyLight);
@@ -186,7 +151,6 @@ public class IconRenderer {
 		pixel(context, startX + 5, startY + 5, greyMid);
 		pixel(context, startX + 6, startY + 5, outline);
 
-		// Row 6
 		pixel(context, startX + 1, startY + 6, outline);
 		pixel(context, startX + 2, startY + 6, outline);
 		pixel(context, startX + 3, startY + 6, outline);
@@ -194,27 +158,21 @@ public class IconRenderer {
 		pixel(context, startX + 5, startY + 6, outline);
 	}
 
-	// -------------------------------------------------------------------------
-	// Arrow Up - 7x4
-	// -------------------------------------------------------------------------
 	private static void drawArrowUp(GuiGraphicsExtractor context, int cx, int cy,
 	                                int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 3;
 
-		// Row 0
 		pixel(context, startX + 2, startY + 0, outline);
 		pixel(context, startX + 3, startY + 0, outline);
 		pixel(context, startX + 4, startY + 0, outline);
 
-		// Row 1
 		pixel(context, startX + 1, startY + 1, outline);
 		pixel(context, startX + 2, startY + 1, color);
 		pixel(context, startX + 3, startY + 1, color);
 		pixel(context, startX + 4, startY + 1, color);
 		pixel(context, startX + 5, startY + 1, outline);
 
-		// Row 2
 		pixel(context, startX + 0, startY + 2, outline);
 		pixel(context, startX + 1, startY + 2, color);
 		pixel(context, startX + 2, startY + 2, color);
@@ -223,26 +181,20 @@ public class IconRenderer {
 		pixel(context, startX + 5, startY + 2, color);
 		pixel(context, startX + 6, startY + 2, outline);
 
-		// Row 3: full outline bar
 		for (int x = 0; x <= 6; x++) {
 			pixel(context, startX + x, startY + 3, outline);
 		}
 	}
 
-	// -------------------------------------------------------------------------
-	// Arrow Down - 7x4
-	// -------------------------------------------------------------------------
 	private static void drawArrowDown(GuiGraphicsExtractor context, int cx, int cy,
 	                                  int color, int outline) {
 		int startX = cx - 3;
 		int startY = cy - 1;
 
-		// Row 0: full outline bar
 		for (int x = 0; x <= 6; x++) {
 			pixel(context, startX + x, startY + 0, outline);
 		}
 
-		// Row 1
 		pixel(context, startX + 0, startY + 1, outline);
 		pixel(context, startX + 1, startY + 1, color);
 		pixel(context, startX + 2, startY + 1, color);
@@ -251,22 +203,17 @@ public class IconRenderer {
 		pixel(context, startX + 5, startY + 1, color);
 		pixel(context, startX + 6, startY + 1, outline);
 
-		// Row 2
 		pixel(context, startX + 1, startY + 2, outline);
 		pixel(context, startX + 2, startY + 2, color);
 		pixel(context, startX + 3, startY + 2, color);
 		pixel(context, startX + 4, startY + 2, color);
 		pixel(context, startX + 5, startY + 2, outline);
 
-		// Row 3
 		pixel(context, startX + 2, startY + 3, outline);
 		pixel(context, startX + 3, startY + 3, outline);
 		pixel(context, startX + 4, startY + 3, outline);
 	}
 
-	// -------------------------------------------------------------------------
-	// Helpers
-	// -------------------------------------------------------------------------
 	private static void pixel(GuiGraphicsExtractor context, int x, int y, int color) {
 		context.fill(x, y, x + 1, y + 1, color);
 	}

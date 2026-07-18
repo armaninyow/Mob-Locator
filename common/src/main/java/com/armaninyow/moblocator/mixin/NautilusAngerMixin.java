@@ -34,7 +34,6 @@ public abstract class NautilusAngerMixin extends net.minecraft.world.entity.Tama
 		builder.define(MOBLOCATOR_NAUTILUS_ANGRY, false);
 	}
 
-	// Set flag when hurt (which triggers NautilusAi.setAngerTarget)
 	@Inject(method = "hurtServer", at = @At("TAIL"))
 	private void moblocator$hurtServer(ServerLevel level, DamageSource source, float damage,
 	                                    CallbackInfoReturnable<Boolean> cir) {
@@ -43,7 +42,6 @@ public abstract class NautilusAngerMixin extends net.minecraft.world.entity.Tama
 		}
 	}
 
-	// Clear flag each server tick when ANGRY_AT and ATTACK_TARGET memories are gone
 	@Inject(method = "customServerAiStep", at = @At("TAIL"))
 	private void moblocator$customServerAiStep(ServerLevel level, CallbackInfo ci) {
 		boolean angry = this.getBrain().hasMemoryValue(MemoryModuleType.ANGRY_AT)
@@ -56,7 +54,6 @@ public abstract class NautilusAngerMixin extends net.minecraft.world.entity.Tama
 		return this.entityData.get(MOBLOCATOR_NAUTILUS_ANGRY);
 	}
 
-	// Satisfied at runtime by MobTargetMixin which is applied to Mob (parent of AbstractNautilus)
 	@Override
 	public boolean moblocator$hasTarget() { return false; }
 }
