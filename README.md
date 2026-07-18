@@ -19,6 +19,9 @@ If you encounter bugs or wish to contribute:
 <details>
   <summary></summary>
    
+### 4.2.0—26.x
+* Added support for Minecraft 26.2
+* Added Per-Mob Colors support for Sulfur Cube
 ### 4.1.0—26.x
 * Added a "Use Per-Mob Colors" option that gives each mob its own unique color based on its real in-game appearance, instead of one shared color for all hostile or passive mobs
 * Updated the Invisible Mob Color setting since invisible mobs can be either hostile or passive and shouldn't share one fixed color, now it only affects the outline color instead of fill color, so invisible mobs stand out without losing their hostile or passive fill color
